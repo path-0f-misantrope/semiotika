@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Вход в систему</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(135deg, #4e54c8, #8f94fb);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .login-box {
+      background: #fff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+      max-width: 400px;
+      width: 100%;
+    }
+    .login-box h2 {
+      margin-bottom: 25px;
+      color: #333;
+      font-weight: 600;
+      text-align: center;
+    }
+    .form-control:focus {
+      box-shadow: 0 0 0 0.2rem rgba(78, 84, 200, 0.25);
+      border-color: #4e54c8;
+    }
+    .btn-login {
+      background: #4e54c8;
+      border: none;
+    }
+    .btn-login:hover {
+      background: #3c40a0;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <h2>🔐 Вход в аккаунт</h2>
+    <form action="/login" method="POST">
+      <div class="mb-3">
+        <label for="username" class="form-label">Имя пользователя</label>
+        <input type="text" id="username" name="username" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Пароль</label>
+        <input type="password" id="password" name="password" class="form-control" required>
+      </div>
+      <button type="submit" class="btn btn-login w-100 text-white">Войти</button>
+    </form>
+  </div>
+</body>
+</html>

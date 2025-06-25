@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Личный кабинет</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(to right, #3a1c71, #d76d77, #ffaf7b);
+            margin: 0;
+            padding: 0;
+            color: #fff;
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .flash {
+            background-color: #4caf50;
+            padding: 10px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .song {
+            background: rgba(255, 255, 255, 0.1);
+            border-left: 5px solid #ffaf7b;
+            margin-bottom: 10px;
+            border-radius: 10px;
+        }
+        .song h3 {
+            margin: 0;
+            padding: 15px;
+            color: #ffd700;
+            cursor: pointer;
+        }
+        .lyrics {
+            display: none;
+            padding: 0 15px 15px;
+        }
+        form {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        input[type="file"] {
+            padding: 10px;
+            border-radius: 5px;
+        }
+        input[type="submit"] {
+            background-color: #ffaf7b;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: #333;
+            font-weight: bold;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        input[type="submit"]:hover {
+            background-color: #ffd700;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Добро пожаловать, {{ .Username }}!</h1>
+
+    <form action="/upload-auth" method="post" enctype="multipart/form-data">
+        <input type="file" name="audio" accept="audio/*" required>
+        <input type="submit" value="Загрузить песню">
+    </form>
+
+    {{ if .Flash }}
+    <div class="flash">{{ .Flash }}</div>
+    {{ end }}
+
+    {{ if .Songs }}
+        {{ range .Songs }}
+        <div class="song">
+            <h3 onclick="toggleLyrics(this)">{{ .Title }}</h3>
+            <div class="lyrics">
+                <pre style="white-space: pre-wrap">{{ .Lyrics }}</pre>
+            </div>
+        </div>
+        {{ end }}
+    {{ else }}
+        <p>У вас пока нет загруженных песен.</p>
+    {{ end }}
+</div>
+
+<script>
+    function toggleLyrics(header) {
+        const lyricsDiv = header.nextElementSibling;
+        lyricsDiv.style.display = lyricsDiv.style.display === 'block' ? 'none' : 'block';
+    }
+</script>
+</body>
+</html>

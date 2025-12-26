@@ -33,7 +33,7 @@ func main() {
 		fmt.Printf("дб упала, %s", err)
 	}
 
-	// GET-запрос отдает HTML-страницу
+
 	r.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "index.html", gin.H{})
 	})
@@ -68,7 +68,7 @@ func mainwork(c *gin.Context) {
 		"-v", fmt.Sprintf("%s:/data", getAbsPath("audio")), // монтируем папку
 		"my-demucs",
 		"--two-stems", "vocals",
-		filename) // название файла внутри /data
+		filename)
 
 	if err := cmdDemucs.Run(); err != nil {
 		return
@@ -226,15 +226,15 @@ func authvedmainwork(c *gin.Context) {
 	}
 
 	filename := file.Filename
-	savePath := fmt.Sprintf("audio/%s", filename) // сохраняем в папку audio
+	savePath := fmt.Sprintf("audio/%s", filename)
 	c.SaveUploadedFile(file, savePath)
 
 	// 1. Запускаем Demucs
 	cmdDemucs := exec.Command("docker", "run", "--rm",
-		"-v", fmt.Sprintf("%s:/data", getAbsPath("audio")), // монтируем папку
+		"-v", fmt.Sprintf("%s:/data", getAbsPath("audio")),
 		"my-demucs",
 		"--two-stems", "vocals",
-		filename) // название файла внутри /data
+		filename) 
 
 	if err := cmdDemucs.Run(); err != nil {
 		return
@@ -290,3 +290,4 @@ func authvedmainwork(c *gin.Context) {
 	c.Redirect(http.StatusSeeOther, "/dashboard")
 
 }
+
